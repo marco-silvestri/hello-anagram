@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use Exception;
 use LaravelZero\Framework\Commands\Command;
 
 class AnagramDetector extends Command
@@ -21,7 +22,7 @@ class AnagramDetector extends Command
         || strlen($this->argument('haystack')) > 1024)
         {
             $this->warning('Arguments cannot exceed 1024 chars length');
-            return null;
+            throw new Exception('Invalid arguments');
         }
 
         $this->_needle = trim($this->argument('needle'));
